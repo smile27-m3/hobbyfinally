@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Violin Practice – Captured Moment</title>
+
+<style>
+:root {
+    --bg-main: #fdfcf8;
+    --text-main: #333;
+    --overlay: rgba(0,0,0,0.35);
+    --card-bg: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* NIGHT MODE */
+body.night {
+    --bg-main: #121212;
+    --text-main: #eaeaea;
+    --overlay: rgba(0,0,0,0.55);
+    --card-bg: #1e1e1e;
+}
+
+/* ===== HEADER (same template as other pages) ===== */
+header {
+    height: 40vh;
+    min-height: 260px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* background layers */
+header .bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1.2s ease-in-out;
+}
+
+header .day {
+    background-image: url('violin morning.jpg');
+    opacity: 1;
+}
+
+header .night {
+    background-image: url('violin night.jpg');
+    opacity: 0;
+}
+
+body.night header .day {
+    opacity: 0;
+}
+
+body.night header .night {
+    opacity: 1;
+}
+
+/* overlay */
+header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--overlay);
+    z-index: 1;
+}
+
+header .title {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+header p {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: #eee;
+}
+
+/* toggle */
+.toggle {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 3;
+}
+
+.toggle button {
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.9);
+    font-weight: 600;
+}
+
+/* ===== MAIN ===== */
+main {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+
+/* reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* content (unchanged) */
+.moment-text {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.moment-image {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.moment-image img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.info {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    margin-bottom: 4rem;
+}
+
+.info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info li {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 4rem 0;
+    opacity: 0.85;
+}
+
+/* back */
+.back {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.back a {
+    text-decoration: none;
+    border: 2px solid currentColor;
+    color: inherit;
+    padding: 0.8rem 2.5rem;
+    border-radius: 30px;
+}
+
+.back a:hover {
+    background-color: currentColor;
+    color: var(--bg-main);
+}
+
+/* footer */
+footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 5rem;
+}
+
+body.night footer {
+    background-color: #000;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="bg day"></div>
+    <div class="bg night"></div>
+
+    <div class="title">
+        <h1>Captured Practice Moment</h1>
+        <p>Morning calm & night honesty</p>
+    </div>
+
+    <div class="toggle">
+        <button onclick="toggleMood()">☀️ / 🌙</button>
+    </div>
+</header>
+
+<main>
+
+    <div class="moment-text reveal">
+        Some days I practice in the morning,  
+        when everything feels light and full of possibility.  
+        Other days, I practice at night,  
+        when the sound feels deeper and more honest.
+    </div>
+
+    <div class="moment-image reveal">
+        <a href="https://youtu.be/FWW-1XFBMpo?si=7PqrHXMamUSaPPUg" target="_blank">
+            <img src="violin11.jpg" alt="Violin practice moment">
+        </a>
+    </div>
+
+    <div class="info reveal">
+        <h3>Practice Notes</h3>
+        <ul>
+            <li>🎻 Duration: 45–60 minutes</li>
+            <li>🎼 Focus: Intonation & tone control</li>
+            <li>🕰 Time: Morning / Late Night</li>
+            <li>🧠 Feeling: Calm, focused, reflective</li>
+        </ul>
+    </div>
+
+    <div class="quote reveal">
+        “Morning builds discipline.  
+        Night reveals truth.”
+    </div>
+
+    <div class="back reveal">
+        <a href="index2.html">← Back to Violin</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 My Violin Journey</p>
+</footer>
+
+<script>
+function toggleMood() {
+    document.body.classList.toggle("night");
+}
+
+/* scroll reveal */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.2 });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
+

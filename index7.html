@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Violin Sheet Music Archive</title>
+
+<style>
+:root {
+    --bg-main: #fdfcf8;
+    --text-main: #333;
+    --overlay: rgba(0,0,0,0.35);
+    --card-bg: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* NIGHT MODE */
+body.night {
+    --bg-main: #121212;
+    --text-main: #eaeaea;
+    --overlay: rgba(0,0,0,0.55);
+    --card-bg: #1e1e1e;
+}
+
+/* ===== HEADER ===== */
+header {
+    height: 40vh;
+    min-height: 260px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* background layers */
+header .bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1.2s ease-in-out;
+}
+
+header .day {
+    background-image: url('violin2.2.jpg');
+    opacity: 1;
+}
+
+header .night {
+    background-image: url('violin2.1.jpg');
+    opacity: 0;
+}
+
+body.night header .day {
+    opacity: 0;
+}
+
+body.night header .night {
+    opacity: 1;
+}
+
+/* overlay */
+header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--overlay);
+    z-index: 1;
+}
+
+header .title {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+
+header h1 {
+    font-size: 2.3rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+header p {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: #eee;
+}
+
+/* toggle */
+.toggle {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 3;
+}
+
+.toggle button {
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.9);
+    font-weight: 600;
+}
+
+/* ===== MAIN ===== */
+main {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+
+.archive-text {
+    text-align: center;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 4rem;
+    opacity: 0.9;
+}
+
+/* grid */
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.2rem;
+}
+
+/* card */
+.sheet-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sheet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.18);
+}
+
+.sheet-card h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.sheet-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+.sheet-card a {
+    display: inline-block;
+    margin-top: 1.2rem;
+    text-decoration: none;
+    border: 2px solid currentColor;
+    padding: 0.6rem 1.8rem;
+    border-radius: 25px;
+    color: inherit;
+}
+
+.sheet-card a:hover {
+    background-color: currentColor;
+    color: var(--bg-main);
+}
+
+/* back */
+.back {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.back a {
+    text-decoration: none;
+    border: 2px solid currentColor;
+    color: inherit;
+    padding: 0.8rem 2.5rem;
+    border-radius: 30px;
+}
+
+.back a:hover {
+    background-color: currentColor;
+    color: var(--bg-main);
+}
+
+/* footer */
+footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 5rem;
+}
+
+body.night footer {
+    background-color: #000;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="bg day"></div>
+    <div class="bg night"></div>
+
+    <div class="title">
+        <h1>Sheet Music Archive</h1>
+        <p>Pieces I’ve practiced and returned to</p>
+    </div>
+
+    <div class="toggle">
+        <button onclick="toggleMood()">☀️ / 🌙</button>
+    </div>
+</header>
+
+<main>
+
+<div class="archive-text">
+    This is a quiet collection of music I’ve played —  
+    not to perform,  
+    but to understand, repeat, and grow with.
+</div>
+
+<section class="library">
+
+    <div class="sheet-card">
+        <h3>Canon in D</h3>
+        <p>
+            🎼 Focus: Bow control & phrasing<br>
+            🧠 Mood: Calm, flowing
+        </p>
+        <a href="https://share.google/63eZ1NI8XIaZIXqD7" target="_blank">
+            View Sheet
+        </a>
+    </div>
+
+    <div class="sheet-card">
+        <h3>Vivaldi – Summer</h3>
+        <p>
+            🎼 Focus: Fast passages & intensity<br>
+            🧠 Mood: Dramatic, stormy
+        </p>
+        <a href="https://share.google/GdOlxg1BgVHmqxalZ" target="_blank">
+            View Sheet
+        </a>
+    </div>
+
+    <div class="sheet-card">
+        <h3>Bach – Minuet in G major</h3>
+        <p>
+            🎼 Focus: Articulation & balance<br>
+            🧠 Mood: Elegant, poised
+        </p>
+        <a href="https://share.google/mTmcJG4fXwxyegAi8" target="_blank">
+            View Sheet
+        </a>
+    </div>
+
+</section>
+
+<div class="back">
+    <a href="index2.html">← Back to Violin</a>
+</div>
+
+</main>
+
+
+<script>
+function toggleMood() {
+    document.body.classList.toggle("night");
+}
+</script>
+
+</body>
+</html>
+

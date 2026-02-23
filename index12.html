@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silent Hill f – Details</title>
+
+<style>
+:root{
+  --bg-main:#f5f5f5;
+  --text-main:#1a1a1a;
+  --card-bg:#ffffff;
+  --overlay:rgba(0,0,0,.35);
+}
+
+body{
+  margin:0;
+  font-family:'Helvetica Neue',Arial,sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  opacity:0;
+  transition:
+    background 1.4s ease,
+    color 1.4s ease,
+    opacity 1.6s ease;
+}
+
+body.loaded{ opacity:1; }
+
+body.night{
+  --bg-main:#000000;
+  --text-main:#eaeaea;
+  --card-bg:#111111;
+  --overlay:rgba(0,0,0,.75);
+}
+
+/* ===== HEADER ===== */
+header{
+  height:28vh;
+  min-height:220px;
+  position:relative;
+  overflow:hidden;
+}
+
+header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('shf-head-day.jpg') center/cover no-repeat;
+  opacity:1;
+  transition:opacity 1.6s ease;
+}
+
+header::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('shf-head-night.jpg') center/cover no-repeat;
+  opacity:0;
+  transition:opacity 1.6s ease;
+}
+
+body.night header::before{ opacity:0; }
+body.night header::after{ opacity:1; }
+
+.intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#fff;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  animation:introFade 4.5s ease forwards;
+}
+.intro h1{
+  font-size:2.8rem;
+  margin:0;
+  animation:textUp 2s ease forwards;
+}
+.intro p{
+  margin-top:1rem;
+  opacity:.7;
+  animation:textUp 2.4s ease forwards;
+}
+
+@keyframes introFade{
+  0%{opacity:1;}
+  70%{opacity:1;}
+  100%{opacity:0; visibility:hidden;}
+}
+@keyframes textUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+header .overlay{
+  position:absolute;
+  inset:0;
+  background:var(--overlay);
+  transition:background 1.4s ease;
+}
+
+header .title{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+header h1,
+header p{
+  color:#ffffff;
+  transition:color 1.4s ease;
+}
+
+header h1{
+  margin:0;
+  font-size:2.4rem;
+  letter-spacing:1px;
+}
+
+header p{
+  margin-top:.6rem;
+  opacity:.9;
+}
+
+/* TOGGLE */
+.toggle{
+  position:absolute;
+  bottom:1rem;
+  right:1rem;
+  z-index:3;
+}
+
+.toggle button{
+  border:none;
+  padding:.55rem 1.3rem;
+  border-radius:20px;
+  background:#ffffff;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* ===== MAIN ===== */
+main{
+  max-width:1000px;
+  margin:3.2rem auto;
+  padding:0 1.5rem;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:var(--card-bg);
+  border-radius:18px;
+  padding:2.2rem;
+  margin-bottom:3.2rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.18);
+  opacity:0;
+  transform:translateY(40px);
+  transition:1.4s ease;
+}
+
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.card h2{
+  margin-top:0;
+  margin-bottom:1.4rem;
+}
+
+/* INFO */
+.info{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2rem;
+}
+
+.info div{
+  border-left:3px solid #b30000;
+  padding-left:1rem;
+}
+
+/* STORY */
+.story{
+  line-height:1.9;
+  font-size:1.1rem;
+}
+
+/* ===== MEDIA ===== */
+.section-title{
+  font-size:1.8rem;
+  margin-bottom:1.5rem;
+}
+
+.media-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.8rem;
+}
+
+.media-box{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  background:#000;
+  box-shadow:0 25px 45px rgba(0,0,0,.45);
+}
+
+.media-box img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  transition:opacity .8s ease;
+}
+
+.media-box video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity .8s ease;
+}
+
+.media-box:hover img{ opacity:0; }
+.media-box:hover video{ opacity:1; }
+
+/* SOUND BUTTON */
+.sound-btn{
+  position:absolute;
+  bottom:.8rem;
+  right:.8rem;
+  z-index:5;
+  border:none;
+  background:rgba(0,0,0,.65);
+  color:#fff;
+  padding:.45rem .7rem;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:1rem;
+}
+
+/* BACK */
+.back{
+  text-align:center;
+  margin:4rem 0 2rem;
+}
+
+.back a{
+  text-decoration:none;
+  border:2px solid currentColor;
+  padding:.8rem 2.6rem;
+  border-radius:30px;
+  color:inherit;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .info{ grid-template-columns:1fr 1fr; }
+}
+@media(max-width:600px){
+  .media-grid,.info{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<div class="intro">
+  <h1>Lose yourself</h1>
+  <p>Choice that need you to choose</p>
+</div>
+<body class="day">
+
+<header>
+  <div class="overlay"></div>
+
+  <div class="title">
+    <h1>Silent Hill f</h1>
+    <p>Beauty wrapped in decay</p>
+  </div>
+
+  <div class="toggle">
+    <button id="modeBtn" onclick="toggleMode()">DAY</button>
+  </div>
+</header>
+
+<main>
+
+<section class="card">
+  <h2>Game Information</h2>
+  <div class="info">
+    <div><strong>Genre</strong><br>Psychological Horror</div>
+    <div><strong>Setting</strong><br>1960s Rural Japan</div>
+    <div><strong>Theme</strong><br>Fear, beauty, decay</div>
+    <div><strong>Developer</strong><br>Konami</div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Story & Experience</h2>
+  <div class="story">
+    Silent Hill f abandons fog-covered towns for a hauntingly beautiful rural Japan.
+    Beneath flowers and silence lies something rotten — watching, waiting.
+    <br><br>
+    Horror here is not loud.  
+    It creeps slowly through memories, guilt,
+    and inevitable decay.
+  </div>
+</section>
+
+<h2 class="section-title">Visual Mood</h2>
+
+<section class="media-grid">
+
+  <div class="media-box">
+    <img src="shf-shot1.jpg">
+    <video muted preload="metadata">
+      <source src="shf-clip1.mp4" type="video/mp4">
+    </video>
+    <button class="sound-btn">🔇</button>
+  </div>
+
+  <div class="media-box">
+    <img src="shf-shot2.jpg">
+    <video muted preload="metadata">
+      <source src="shf-clip2.mp4" type="video/mp4">
+    </video>
+    <button class="sound-btn">🔇</button>
+  </div>
+
+</section>
+
+<div class="back">
+  <a href="index9.html">← Back to Games</a>
+</div>
+
+</main>
+
+<script>
+/* PAGE LOAD */
+window.onload=()=>document.body.classList.add("loaded");
+
+/* DAY / NIGHT */
+function toggleMode(){
+  document.body.classList.toggle("night");
+  document.body.classList.toggle("day");
+  document.getElementById("modeBtn").textContent =
+    document.body.classList.contains("night") ? "NIGHT" : "DAY";
+}
+
+/* SCROLL ANIMATION */
+const cards=document.querySelectorAll(".card");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("show");
+  });
+},{threshold:.25});
+cards.forEach(c=>observer.observe(c));
+
+/* VIDEO + SOUND */
+document.querySelectorAll(".media-box").forEach(box=>{
+  const video=box.querySelector("video");
+  const btn=box.querySelector(".sound-btn");
+
+  box.addEventListener("mouseenter",()=>video.play());
+  box.addEventListener("mouseleave",()=>{
+    video.pause();
+    video.currentTime=0;
+  });
+
+  btn.addEventListener("click",()=>{
+    video.muted=!video.muted;
+    btn.textContent=video.muted?"🔇":"🔊";
+  });
+});
+</script>
+
+</body>
+</html>
+
